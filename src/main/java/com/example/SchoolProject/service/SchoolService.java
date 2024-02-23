@@ -10,6 +10,7 @@ import com.example.SchoolProject.repository.SchoolRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +44,14 @@ public class SchoolService {
         School oldSchool=findById(id);
         oldSchool.setSchoolName(request.getSchoolName());
         schoolRepository.save(oldSchool);
+    }
+
+    public List<School> getSchool(String name) {
+        if(name==null){
+            return schoolRepository.findAll();
+        }else {
+            return schoolRepository.findAllBySchoolName(name);
+        }
+
     }
 }

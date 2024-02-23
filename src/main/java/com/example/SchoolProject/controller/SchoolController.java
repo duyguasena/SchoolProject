@@ -4,11 +4,14 @@ import com.example.SchoolProject.dto.request.SchoolRequest;
 import com.example.SchoolProject.dto.response.SchoolResponse;
 import com.example.SchoolProject.exception.SchoolAlreadyExistException;
 import com.example.SchoolProject.exception.SchoolNotFoundException;
+import com.example.SchoolProject.model.School;
 import com.example.SchoolProject.service.SchoolService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/schools")
@@ -34,6 +37,11 @@ public class SchoolController {
     @PutMapping("{id}")
     public void updateSchool(@PathVariable Long id,@RequestBody SchoolRequest request){
          schoolService.updateSchool(id,request);
+    }
+
+    @GetMapping
+    public List<School> getSchool(@RequestParam(required = false) String name){
+        return schoolService.getSchool(name);
     }
 
     //Bu buraya yazılmamalı geçici olarak burada dursun
